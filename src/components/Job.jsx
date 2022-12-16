@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Job = ({ listing }) => {
-  const { title, company, type, location, created_at } = listing
+  const { title, company, type, location } = listing
 
   return (
     <div className="row">

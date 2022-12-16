@@ -9,21 +9,29 @@ import Job from './components/Job'
 function App() {
   const [listings, setListings] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  // const [term, setTerm] = useState('')
+  const [term, setTerm] = useState({
+    description: '',
+    location: '',
+    isFulltime: true,
+  })
 
   useEffect(() => {
-    fetch(`http://dev3.dansmultipro.co.id/api/recruitment/positions.json`)
+    const { description, location, isFulltime } = term
+
+    fetch(
+      `http://dev3.dansmultipro.co.id/api/recruitment/positions.json?description=${description}&location=${location}&full_time=${isFulltime}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setListings(data)
         setIsLoading(false)
       })
-  }, [])
+  }, [term])
 
   return (
     <div>
       <NavBar />
-      <Search />
+      <Search searchText={(text) => setTerm(text)} />
 
       <Container>
         <h3 className="card-title mt-3 mb-2">Job List</h3>
@@ -31,18 +39,18 @@ function App() {
           <ul className="list-group list-group-flush">
             {isLoading ? (
               <li className="list-group-item">
-                <p class="placeholder-glow">
-                  <span class="placeholder col-12"></span>
+                <p className="placeholder-glow">
+                  <span className="placeholder col-12"></span>
                 </p>
-                <p class="placeholder-glow">
-                  <span class="placeholder col-12"></span>
+                <p className="placeholder-glow">
+                  <span className="placeholder col-12"></span>
                 </p>
               </li>
             ) : (
               <div>
                 {listings.map((listing) => (
-                  <li className="list-group-item">
-                    <Job key={listing.id} listing={listing} />
+                  <li className="list-group-item" key={listing.id}>
+                    <Job listing={listing} />
                   </li>
                 ))}
               </div>

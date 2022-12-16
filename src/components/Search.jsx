@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 
-const Search = () => {
+const Search = ({ searchText }) => {
+  const [text, setText] = useState({
+    description: '',
+    location: '',
+    isFulltime: true,
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    searchText(text)
+  }
+
   return (
     <div>
       <Container>
-        <form className="d-flex justify-content-between my-3" role="search">
+        <form
+          onSubmit={onSubmit}
+          className="d-flex justify-content-between my-3"
+          role="search"
+        >
           <div className="flex-fill me-3">
             <label htmlFor="jobdesc" className="fw-bold">
               Job Description
             </label>
             <input
+              onChange={(e) =>
+                setText((prevState) => {
+                  return { ...prevState, description: e.target.value }
+                })
+              }
               id="jobdesc"
               className="form-control me-2"
               type="search"
@@ -23,6 +43,11 @@ const Search = () => {
               Location
             </label>
             <input
+              onChange={(e) =>
+                setText((prevState) => {
+                  return { ...prevState, location: e.target.value }
+                })
+              }
               id="location"
               className="form-control me-2"
               type="search"
@@ -32,6 +57,8 @@ const Search = () => {
           </div>
           <div className="form-check mt-4 me-3">
             <input
+              onChange={() => {}}
+              checked
               className="form-check-input"
               type="checkbox"
               value=""
