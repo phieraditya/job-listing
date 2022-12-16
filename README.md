@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Job Listing Page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A job listing page that fetch data from a [Recruitment API](http://dev3.dansmultipro.co.id/api/recruitment/positions.json), bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Bootstrap](https://getbootstrap.com/).
 
 ## Available Scripts
 
